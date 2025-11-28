@@ -9,6 +9,12 @@ type DashboardStats = {
     done: number;
     blocked: number;
   };
+  activity: {
+    id: string;
+    author: string;
+    action: string;
+    timestamp: string;
+  }[];
 };
 
 const fetchDashboardStats = async (): Promise<DashboardStats> => {
