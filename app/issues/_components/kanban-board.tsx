@@ -68,7 +68,8 @@ export function KanbanBoard() {
             const cards = issues
               .filter((issue) => issue.status === column.status)
               .map((issue) => ({
-                id: issue.id,
+                issueId: issue.id,
+                code: issue.code,
                 title: issue.title,
                 assignee: issue.assignee ?? "Non assigné",
                 dueDate: issue.dueDate,
