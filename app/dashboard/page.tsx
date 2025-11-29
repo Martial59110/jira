@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Suspense } from "react";
 import { ActivityList } from "./_components/activity-list";
 import { DashboardShell } from "./_components/dashboard-shell";
@@ -37,9 +38,12 @@ export default function DashboardPage() {
         title="Tableau de bord"
         description="Surveille l’activité de ton espace produit en un coup d’œil."
         actions={
-          <button className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500">
+          <Link
+            href="/issues"
+            className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
+          >
             Créer un ticket
-          </button>
+          </Link>
         }
       >
         <Suspense fallback={<SummaryCardsFallback />}>
