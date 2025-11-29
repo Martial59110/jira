@@ -1,0 +1,30 @@
+"use client";
+
+import { KanbanCard } from "./kanban-card";
+
+type KanbanColumnProps = {
+  title: string;
+  cards: {
+    id: string;
+    title: string;
+    assignee: string;
+    dueDate: string;
+  }[];
+};
+
+export function KanbanColumn({ title, cards }: KanbanColumnProps) {
+  return (
+    <article className="flex min-h-[320px] flex-col rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+      <header className="mb-4 flex items-center justify-between text-sm font-semibold text-zinc-500">
+        <span>{title}</span>
+        <span className="text-xs font-normal text-zinc-400">{cards.length}</span>
+      </header>
+      <div className="flex flex-1 flex-col gap-3">
+        {cards.length === 0 && <p className="text-xs text-zinc-400">Aucun ticket.</p>}
+        {cards.map((card) => (
+          <KanbanCard key={card.id} {...card} />
+        ))}
+      </div>
+    </article>
+  );
+}
