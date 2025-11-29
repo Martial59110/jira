@@ -32,7 +32,7 @@ function ActivityListFallback() {
 
 export default function DashboardPage() {
   return (
-    <main className="min-h-screen bg-zinc-50 px-6 py-12 font-sans dark:bg-black">
+    <main className="min-h-screen font-sans">
       <DashboardShell
         title="Tableau de bord"
         description="Surveille l’activité de ton espace produit en un coup d’œil."
