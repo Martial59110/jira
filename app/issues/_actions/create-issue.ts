@@ -18,10 +18,6 @@ export type CreateIssueActionState = {
   error?: string;
 };
 
-const initialState: CreateIssueActionState = {
-  success: false,
-};
-
 async function generateIssueCode() {
   const lastIssue = await prisma.issue.findFirst({
     orderBy: { createdAt: "desc" },
@@ -86,5 +82,3 @@ export async function createIssueAction(
 
   return { success: true };
 }
-
-export { initialState as createIssueInitialState };
