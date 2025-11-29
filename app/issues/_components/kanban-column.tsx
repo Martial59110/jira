@@ -23,16 +23,16 @@ export function KanbanColumn({ title, status, cards }: KanbanColumnProps) {
   return (
     <article
       ref={setNodeRef}
-      className={`flex min-h-[360px] flex-col rounded-2xl border border-zinc-200 bg-white p-4 transition dark:border-zinc-800 dark:bg-zinc-900 ${
-        isOver ? "border-blue-400 bg-blue-50/60 dark:border-blue-400 dark:bg-blue-500/10" : ""
+      className={`flex min-h-[360px] flex-col rounded-2xl bg-[#f8f9ff] p-4 transition shadow-sm ring-1 ring-[var(--border-color)] ${
+        isOver ? "ring-2 ring-[var(--brand)]" : ""
       }`}
     >
-      <header className="mb-4 flex items-center justify-between text-sm font-semibold text-zinc-500">
+      <header className="mb-4 flex items-center justify-between text-sm font-semibold text-[var(--muted)]">
         <span>{title}</span>
-        <span className="text-xs font-normal text-zinc-400">{cards.length}</span>
+        <span className="text-xs font-normal text-[var(--muted)]">{cards.length}</span>
       </header>
       <div className="flex flex-1 flex-col gap-3">
-        {cards.length === 0 && <p className="text-xs text-zinc-400">Aucun ticket.</p>}
+        {cards.length === 0 && <p className="text-xs text-[var(--muted)]">Aucun ticket.</p>}
         {cards.map((card) => (
           <KanbanCard key={card.issueId} {...card} />
         ))}
