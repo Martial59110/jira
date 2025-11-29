@@ -29,7 +29,7 @@ function KanbanBoardFallback() {
 
 export default function IssuesPage() {
   return (
-    <main className="min-h-screen bg-zinc-50 px-6 py-12 font-sans dark:bg-black">
+    <main className="min-h-screen font-sans">
       <Suspense fallback={<KanbanBoardFallback />}>
         <KanbanBoard />
       </Suspense>
