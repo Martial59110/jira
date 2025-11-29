@@ -1,4 +1,7 @@
+import { authConfig } from "@/lib/auth/options";
 import { Suspense } from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { KanbanBoard } from "./_components/kanban-board";
 
 function KanbanBoardFallback() {
@@ -27,7 +30,12 @@ function KanbanBoardFallback() {
   );
 }
 
-export default function IssuesPage() {
+export default async function IssuesPage() {
+  const session = await getServerSession(authConfig);
+  if (!session) {
+    redirect("/login");
+  }
+
   return (
     <main className="min-h-screen font-sans">
       <Suspense fallback={<KanbanBoardFallback />}>
