@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "./providers";
+import { AppNav } from "./_components/app-nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AppProviders>{children}</AppProviders>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} bg-zinc-50 antialiased dark:bg-black`}
+      >
+        <AppProviders>
+          <AppNav />
+          <div className="px-6 py-10">{children}</div>
+        </AppProviders>
       </body>
     </html>
   );
