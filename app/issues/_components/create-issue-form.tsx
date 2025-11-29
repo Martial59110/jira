@@ -1,13 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
-import {
-  createIssueAction,
-  createIssueInitialState,
-  CreateIssueActionState,
-} from "../_actions/create-issue";
+import { useFormStatus } from "react-dom";
+import { useCreateIssueForm } from "../_hooks/use-create-issue-form";
 
 const statusOptions = [
   { value: "todo", label: "Pas commencé" },
@@ -34,18 +28,7 @@ function SubmitButton() {
 }
 
 export function CreateIssueForm({ onSuccess }: CreateIssueFormProps) {
-  const router = useRouter();
-  const [state, formAction] = useFormState<CreateIssueActionState, FormData>(
-    createIssueAction,
-    createIssueInitialState,
-  );
-
-  useEffect(() => {
-    if (state.success) {
-      router.refresh();
-      onSuccess?.();
-    }
-  }, [state, onSuccess, router]);
+  const { state, formAction } = useCreateIssueForm(onSuccess);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
