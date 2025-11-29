@@ -27,7 +27,7 @@ export function KanbanCard({ id, title, assignee, dueDate }: KanbanCardProps) {
       style={style}
       {...listeners}
       {...attributes}
-      className={`rounded-xl border border-zinc-200 bg-white p-4 shadow-sm transition hover:border-blue-200 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-950 ${
+      className={`rounded-xl border border-zinc-200 bg-white p-4 shadow-sm transition-colors hover:border-blue-200 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-950 ${
         isDragging ? "opacity-70 ring-2 ring-blue-400" : ""
       }`}
     >
