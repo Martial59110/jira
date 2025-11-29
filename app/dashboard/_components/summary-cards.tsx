@@ -25,11 +25,11 @@ export function SummaryCards() {
         return (
           <article
             key={card.key}
-            className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900"
+            className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[var(--border-color)]"
           >
-            <div className={`h-1 w-12 rounded-full ${card.accent}`} />
-            <p className="mt-4 text-sm font-medium text-zinc-500">{card.label}</p>
-            <p className="mt-2 text-3xl font-semibold text-zinc-900 dark:text-white">{value}</p>
+            <div className={`h-1.5 w-14 rounded-full ${card.accent}`} />
+            <p className="mt-4 text-xs uppercase tracking-wide text-[var(--muted)]">{card.label}</p>
+            <p className="mt-2 text-4xl font-semibold text-[var(--foreground)]">{value}</p>
           </article>
         );
       })}
