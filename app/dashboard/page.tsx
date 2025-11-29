@@ -13,11 +13,11 @@ function SummaryCardsFallback() {
       {Array.from({ length: 4 }).map((_, index) => (
         <div
           key={index}
-          className="rounded-2xl border border-dashed border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900"
+          className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[var(--border-color)]"
         >
-          <div className="h-1 w-12 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-          <div className="mt-4 h-4 w-24 animate-pulse rounded-full bg-zinc-200 dark:bg-zinc-700" />
-          <div className="mt-2 h-8 w-16 animate-pulse rounded-lg bg-zinc-200 dark:bg-zinc-700" />
+          <div className="h-1.5 w-16 animate-pulse rounded-full bg-slate-200" />
+          <div className="mt-4 h-4 w-28 animate-pulse rounded-full bg-slate-200" />
+          <div className="mt-3 h-10 w-16 animate-pulse rounded-lg bg-slate-200" />
         </div>
       ))}
     </div>
@@ -26,8 +26,13 @@ function SummaryCardsFallback() {
 
 function ActivityListFallback() {
   return (
-    <div className="rounded-2xl border border-dashed border-zinc-200 bg-white p-6 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-      Chargement de l’activité…
+    <div className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-[var(--border-color)]">
+      <div className="mb-4 h-5 w-40 animate-pulse rounded-full bg-slate-200" />
+      <div className="space-y-3">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div key={index} className="h-4 w-full animate-pulse rounded-full bg-slate-200" />
+        ))}
+      </div>
     </div>
   );
 }
