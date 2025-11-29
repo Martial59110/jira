@@ -7,7 +7,8 @@ type KanbanColumnProps = {
   title: string;
   status: string;
   cards: {
-    id: string;
+    issueId: string;
+    code: string;
     title: string;
     assignee: string;
     dueDate: string;
@@ -33,7 +34,7 @@ export function KanbanColumn({ title, status, cards }: KanbanColumnProps) {
       <div className="flex flex-1 flex-col gap-3">
         {cards.length === 0 && <p className="text-xs text-zinc-400">Aucun ticket.</p>}
         {cards.map((card) => (
-          <KanbanCard key={card.id} {...card} />
+          <KanbanCard key={card.issueId} {...card} />
         ))}
       </div>
     </article>
