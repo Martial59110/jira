@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 const columns = [
   { status: "todo", label: "Pas commencé" },
@@ -7,42 +8,26 @@ const columns = [
   { status: "done", label: "Fait" },
 ] as const;
 
-const issues = [
-  {
-    id: "MYJ-214",
-    title: "Tâche 1",
-    status: "todo",
-    assignee: "Victor",
-    dueDate: "27 nov.",
-  },
-  {
-    id: "MYJ-215",
-    title: "Tâche 2",
-    status: "done",
-    assignee: "Léa",
-    dueDate: "28 nov.",
-  },
-  {
-    id: "MYJ-216",
-    title: "Tâche 3",
-    status: "blocked",
-    assignee: "Yasmine",
-    dueDate: "29 nov.",
-  },
-  {
-    id: "MYJ-217",
-    title: "Audit sécurité",
-    status: "inProgress",
-    assignee: "Nora",
-    dueDate: "30 nov.",
-  },
-] as const;
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+  day: "2-digit",
+  month: "short",
+});
 
 export async function GET() {
-  await new Promise((resolve) => setTimeout(resolve, 300));
+  const issues = await prisma.issue.findMany({
+    orderBy: { updatedAt: "desc" },
+  });
+
+  const formattedIssues = issues.map((issue) => ({
+    id: issue.id,
+    title: issue.title,
+    status: issue.status,
+    assignee: issue.assignee ?? "Non assigné",
+    dueDate: issue.dueDate ? dateFormatter.format(issue.dueDate) : "—",
+  }));
 
   return NextResponse.json({
     columns,
-    issues,
+    issues: formattedIssues,
   });
 }
