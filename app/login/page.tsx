@@ -1,10 +1,8 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState, useTransition } from "react";
-
-import { useSession } from "next-auth/react";
 
 export default function LoginPage() {
   const { status } = useSession();
@@ -37,13 +35,17 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-[80vh] items-center justify-center">
+    <main className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-[#f7f9ff] to-[#eef2ff]">
+      <div className="absolute left-0 top-0 hidden h-full w-72 bg-[#111727] md:block" />
       {status === "authenticated" ? (
-        <div className="rounded-2xl border border-zinc-200 bg-white p-8 text-center text-sm text-zinc-600 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-          Tu es déjà connecté.{" "}
+        <div className="relative z-10 w-full max-w-lg rounded-3xl bg-white/90 p-10 text-center shadow-2xl ring-1 ring-[var(--border-color)]">
+          <h2 className="text-2xl font-semibold text-[var(--foreground)]">Tu es déjà connecté</h2>
+          <p className="mt-3 text-sm text-[var(--muted)]">
+            Accède directement au tableau de bord pour continuer.
+          </p>
           <button
             onClick={() => router.push("/")}
-            className="text-blue-600 underline dark:text-blue-400"
+            className="mt-6 rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
           >
             Retour au dashboard
           </button>
@@ -51,32 +53,35 @@ export default function LoginPage() {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+          className="relative z-10 w-full max-w-lg rounded-3xl bg-white p-10 shadow-2xl ring-1 ring-[var(--border-color)]"
         >
-          <h1 className="text-2xl font-semibold text-zinc-900 dark:text-white">Connexion</h1>
-          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            Utilise les identifiants de test indiqués ci-dessous.
+          <p className="text-xs uppercase tracking-[0.4em] text-[var(--muted)]">Bienvenue</p>
+          <h1 className="mt-2 text-3xl font-semibold text-[var(--foreground)]">Connexion</h1>
+          <p className="mt-1 text-sm text-[var(--muted)]">
+            Utilise les identifiants de test pour accéder à ton workspace.
           </p>
 
           <div className="mt-6 flex flex-col gap-4">
-            <label className="text-sm text-zinc-600 dark:text-zinc-300">
+            <label className="text-sm font-medium text-[var(--foreground)]">
               Email
               <input
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-blue-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+                className="mt-2 w-full rounded-xl border border-[var(--border-color)] bg-[#f4f6fb] px-4 py-3 text-[var(--foreground)] focus:border-[var(--brand)] focus:bg-white focus:outline-none"
+                placeholder="you@company.com"
                 required
               />
             </label>
 
-            <label className="text-sm text-zinc-600 dark:text-zinc-300">
+            <label className="text-sm font-medium text-[var(--foreground)]">
               Mot de passe
               <input
                 type="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-blue-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+                className="mt-2 w-full rounded-xl border border-[var(--border-color)] bg-[#f4f6fb] px-4 py-3 text-[var(--foreground)] focus:border-[var(--brand)] focus:bg-white focus:outline-none"
+                placeholder="••••••••"
                 required
               />
             </label>
@@ -87,12 +92,12 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="mt-6 w-full rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500 disabled:opacity-70"
+            className="mt-8 w-full rounded-full bg-[var(--brand)] px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500 disabled:opacity-70"
           >
             {isPending ? "Connexion…" : "Se connecter"}
           </button>
 
-          <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-400">
+          <p className="mt-4 text-xs text-[var(--muted)]">
             Comptes de test : marti@example.com / admin123 ou team@example.com / member123
           </p>
         </form>
