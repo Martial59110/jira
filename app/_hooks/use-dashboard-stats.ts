@@ -1,6 +1,7 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { getApiUrl } from "@/lib/get-api-url";
 
 type DashboardStats = {
   totals: {
@@ -18,7 +19,7 @@ type DashboardStats = {
 };
 
 const fetchDashboardStats = async (): Promise<DashboardStats> => {
-  const response = await fetch("/api/dashboard");
+  const response = await fetch(getApiUrl("/api/dashboard"));
   if (!response.ok) {
     throw new Error("Impossible de charger les statistiques");
   }
@@ -26,7 +27,7 @@ const fetchDashboardStats = async (): Promise<DashboardStats> => {
 };
 
 export function useDashboardStats() {
-  return useQuery({
+  return useSuspenseQuery<DashboardStats>({
     queryKey: ["dashboard", "stats"],
     queryFn: fetchDashboardStats,
   });
