@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useIssuesBoard } from "../_hooks/use-issues-board";
 import { KanbanColumn } from "./kanban-column";
-import { CreateIssueForm } from "./create-issue-form";
+import { CreateIssuePanel } from "./create-issue-panel";
 
 export function KanbanBoard() {
   const { data } = useIssuesBoard();
@@ -34,25 +34,7 @@ export function KanbanBoard() {
         </div>
       </header>
 
-      {showForm ? (
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Créer un ticket</h2>
-            <button
-              type="button"
-              className="text-sm text-zinc-500 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
-              onClick={() => setShowForm(false)}
-            >
-              Fermer
-            </button>
-          </div>
-          <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">
-            Les tickets créés ici apparaîtront automatiquement dans la colonne correspondant au
-            statut.
-          </p>
-          <CreateIssueForm onSuccess={() => setShowForm(false)} />
-        </div>
-      ) : null}
+      {showForm ? <CreateIssuePanel onClose={() => setShowForm(false)} /> : null}
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {columns.length === 0 && (
