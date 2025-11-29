@@ -1,7 +1,8 @@
-"use client";
-
+import { authConfig } from "@/lib/auth/options";
 import Link from "next/link";
 import { Suspense } from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { ActivityList } from "./_components/activity-list";
 import { DashboardShell } from "./_components/dashboard-shell";
 import { SummaryCards } from "./_components/summary-cards";
@@ -31,7 +32,12 @@ function ActivityListFallback() {
   );
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const session = await getServerSession(authConfig);
+  if (!session) {
+    redirect("/login");
+  }
+
   return (
     <main className="min-h-screen font-sans">
       <DashboardShell
