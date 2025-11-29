@@ -10,7 +10,7 @@ const cardsConfig = [
 ] as const;
 
 export function SummaryCards() {
-  const { data, isPending } = useDashboardStats();
+  const { data } = useDashboardStats();
   const totals = data?.totals ?? {
     backlog: 0,
     inProgress: 0,
@@ -29,9 +29,7 @@ export function SummaryCards() {
           >
             <div className={`h-1 w-12 rounded-full ${card.accent}`} />
             <p className="mt-4 text-sm font-medium text-zinc-500">{card.label}</p>
-            <p className="mt-2 text-3xl font-semibold text-zinc-900 dark:text-white">
-              {isPending ? "…" : value}
-            </p>
+            <p className="mt-2 text-3xl font-semibold text-zinc-900 dark:text-white">{value}</p>
           </article>
         );
       })}
