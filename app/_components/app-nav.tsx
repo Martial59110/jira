@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,17 +11,18 @@ const navLinks = [
 
 export function AppNav() {
   const pathname = usePathname();
+  const { status } = useSession();
 
   return (
     <header className="border-b border-zinc-200 bg-white/80 px-6 py-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/80">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4">
         <div className="flex items-baseline gap-2">
           <span className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">
             MyJira
           </span>
           <span className="text-xs text-zinc-500 dark:text-zinc-400">Beta</span>
         </div>
-        <nav className="flex gap-2">
+        <nav className="flex items-center gap-2">
           {navLinks.map((link) => {
             const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
@@ -38,6 +40,14 @@ export function AppNav() {
               </Link>
             );
           })}
+          {status === "authenticated" ? (
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="rounded-full border border-zinc-300 px-4 py-2 text-sm text-zinc-700 transition hover:border-zinc-900 dark:border-zinc-700 dark:text-zinc-200"
+            >
+              Déconnexion
+            </button>
+          ) : null}
         </nav>
       </div>
     </header>
