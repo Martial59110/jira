@@ -17,7 +17,7 @@ const getRelativeTime = (timestamp: string) => {
 };
 
 export function ActivityList() {
-  const { data, isPending } = useDashboardStats();
+  const { data } = useDashboardStats();
   const items = data?.activity ?? [];
 
   return (
@@ -33,28 +33,22 @@ export function ActivityList() {
       </header>
 
       <ol className="space-y-4">
-        {isPending && (
-          <li className="animate-pulse text-sm text-zinc-500 dark:text-zinc-400">
-            Chargement de l’activité…
-          </li>
-        )}
-        {!isPending && items.length === 0 && (
+        {items.length === 0 && (
           <li className="text-sm text-zinc-500 dark:text-zinc-400">Aucune activité récente.</li>
         )}
-        {!isPending &&
-          items.map((item) => (
-            <li key={item.id} className="flex items-start gap-3">
-              <span className="mt-1 h-2.5 w-2.5 rounded-full bg-blue-500" />
-              <div>
-                <p className="text-sm text-zinc-800 dark:text-zinc-100">
-                  <span className="font-semibold">{item.author}</span> {item.action}
-                </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  {getRelativeTime(item.timestamp)}
-                </p>
-              </div>
-            </li>
-          ))}
+        {items.map((item) => (
+          <li key={item.id} className="flex items-start gap-3">
+            <span className="mt-1 h-2.5 w-2.5 rounded-full bg-blue-500" />
+            <div>
+              <p className="text-sm text-zinc-800 dark:text-zinc-100">
+                <span className="font-semibold">{item.author}</span> {item.action}
+              </p>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                {getRelativeTime(item.timestamp)}
+              </p>
+            </div>
+          </li>
+        ))}
       </ol>
     </section>
   );
