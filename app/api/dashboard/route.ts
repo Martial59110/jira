@@ -1,34 +1,44 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+
+const defaultTotals = {
+  backlog: 0,
+  inProgress: 0,
+  done: 0,
+  blocked: 0,
+};
+
+const statusToKey: Record<string, keyof typeof defaultTotals> = {
+  todo: "backlog",
+  inProgress: "inProgress",
+  done: "done",
+  blocked: "blocked",
+};
 
 export async function GET() {
-  await new Promise((resolve) => setTimeout(resolve, 300));
+  const grouped = await prisma.issue.groupBy({
+    by: ["status"],
+    _count: { status: true },
+  });
+
+  const totals = { ...defaultTotals };
+  for (const entry of grouped) {
+    const key = statusToKey[entry.status] ?? "backlog";
+    totals[key] = entry._count.status;
+  }
+
+  const activity = await prisma.activity.findMany({
+    orderBy: { timestamp: "desc" },
+    take: 5,
+  });
 
   return NextResponse.json({
-    totals: {
-      backlog: 42,
-      inProgress: 18,
-      done: 96,
-      blocked: 5,
-    },
-    activity: [
-      {
-        id: "1",
-        author: "Léa",
-        action: "a créé le ticket MYJ-214",
-        timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
-      },
-      {
-        id: "2",
-        author: "Victor",
-        action: "a déplacé MYJ-198 vers En cours",
-        timestamp: new Date(Date.now() - 32 * 60 * 1000).toISOString(),
-      },
-      {
-        id: "3",
-        author: "Yasmine",
-        action: "a clôturé MYJ-176",
-        timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
-      },
-    ],
+    totals,
+    activity: activity.map((item) => ({
+      id: item.id,
+      author: item.author,
+      action: item.action,
+      timestamp: item.timestamp.toISOString(),
+    })),
   });
 }
