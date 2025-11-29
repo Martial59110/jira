@@ -14,11 +14,7 @@ export function KanbanBoard() {
   const [showForm, setShowForm] = useState(false);
   const [moveError, setMoveError] = useState<string | null>(null);
   const { moveIssue } = useMoveIssue();
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 10 },
-    }),
-  );
+  const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -64,7 +60,7 @@ export function KanbanBoard() {
       {moveError ? <p className="text-sm text-rose-500">{moveError}</p> : null}
 
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="grid auto-cols-[280px] grid-flow-col gap-4 overflow-x-auto pb-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {columns.length === 0 && (
             <p className="col-span-full text-sm text-zinc-500">Aucune colonne définie.</p>
           )}
