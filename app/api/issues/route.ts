@@ -20,6 +20,7 @@ export async function GET() {
 
   const formattedIssues = issues.map((issue) => ({
     id: issue.id,
+    code: issue.code,
     title: issue.title,
     status: issue.status,
     assignee: issue.assignee ?? "Non assigné",
