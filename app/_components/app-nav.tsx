@@ -23,23 +23,26 @@ export function AppNav() {
           <span className="text-xs text-zinc-500 dark:text-zinc-400">Beta</span>
         </div>
         <nav className="flex items-center gap-2">
-          {navLinks.map((link) => {
-            const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+          {status === "authenticated"
+            ? navLinks.map((link) => {
+                const isActive =
+                  link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
 
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`rounded-full px-4 py-2 text-sm transition ${
-                  isActive
-                    ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
-                    : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`rounded-full px-4 py-2 text-sm transition ${
+                      isActive
+                        ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
+                        : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })
+            : null}
           {status === "authenticated" ? (
             <button
               onClick={() => signOut({ callbackUrl: "/login" })}
