@@ -26,12 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-zinc-50 antialiased dark:bg-black`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AppProviders>
-          <AppNav />
-          <div className="px-6 py-10">{children}</div>
+          <div className="flex min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+            <AppNav />
+            <div className="flex-1 overflow-y-auto px-10 py-10">{children}</div>
+          </div>
         </AppProviders>
       </body>
     </html>
