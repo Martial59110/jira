@@ -1,14 +1,12 @@
 "use client";
 
 import { useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { moveIssueAction, type MoveIssueActionResult } from "../_actions/move-issue";
 import { type IssuesBoardResponse } from "./use-issues-board";
 
 export function useMoveIssue() {
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const moveIssue = (issueId: string, status: string, onError?: (message: string) => void) => {
@@ -52,7 +50,6 @@ export function useMoveIssue() {
         queryClient.invalidateQueries({
           queryKey,
         });
-        router.refresh();
       } catch {
         rollback();
         onError?.("Impossible de déplacer le ticket.");
