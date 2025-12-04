@@ -30,6 +30,11 @@ export function KanbanBoard() {
       return;
     }
 
+    const currentIssue = issues.find((issue) => issue.id === issueId);
+    if (!currentIssue || currentIssue.status === targetStatus) {
+      return;
+    }
+
     moveIssue(issueId, targetStatus, (message) => setMoveError(message));
   };
 
