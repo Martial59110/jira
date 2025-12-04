@@ -12,6 +12,7 @@ export function useMoveIssue() {
   const moveIssue = (issueId: string, status: string, onError?: (message: string) => void) => {
     startTransition(async () => {
       const queryKey = ["issues", "board"];
+      await queryClient.cancelQueries({ queryKey, exact: true });
       const previousData = queryClient.getQueryData<IssuesBoardResponse>(queryKey);
       if (previousData) {
         const optimisticIssues = previousData.issues.map((issue) =>
