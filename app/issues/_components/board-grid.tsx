@@ -33,7 +33,7 @@ export function BoardGrid({ columns, issues, sensors, onDragEnd, moveError }: Bo
         code: issue.code,
         title: issue.title,
         assignee: issue.assignee ?? "Non assigné",
-            dueDate: issue.dueDate ?? "",
+        dueDate: issue.dueDate ?? "",
       })),
   }));
 
