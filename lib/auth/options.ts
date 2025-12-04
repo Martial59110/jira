@@ -1,5 +1,5 @@
 import Credentials from "next-auth/providers/credentials";
-import type { NextAuthConfig } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
@@ -9,7 +9,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const authConfig: NextAuthConfig = {
+export const authConfig: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
