@@ -4,6 +4,7 @@ import { authConfig } from "@/lib/auth/options";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
+import type { Session } from "next-auth";
 import { z } from "zod";
 
 const moveIssueSchema = z.object({
@@ -16,8 +17,12 @@ export type MoveIssueActionResult = {
   error?: string;
 };
 
+type SessionWithEmail = Session & {
+  user: NonNullable<Session["user"]> & { email: string };
+};
+
 export async function moveIssueAction(formData: FormData): Promise<MoveIssueActionResult> {
-  const session = await getServerSession(authConfig);
+  const session = (await getServerSession(authConfig)) as SessionWithEmail | null;
   if (!session?.user?.email) {
     return { success: false, error: "Authentification requise." };
   }
