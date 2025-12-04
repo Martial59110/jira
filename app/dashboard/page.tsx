@@ -44,14 +44,14 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main className="min-h-screen font-sans">
+    <main className="min-h-screen bg-[var(--background)] px-4 py-10 font-sans">
       <DashboardShell
         title="Tableau de bord"
         description="Surveille l’activité de ton espace produit en un coup d’œil."
         actions={
           <Link
             href="/issues"
-            className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
+            className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-[#0f172a] shadow-sm transition hover:bg-blue-50"
           >
             Créer un ticket
           </Link>
