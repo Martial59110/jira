@@ -9,14 +9,14 @@ type DashboardShellProps = {
 
 export function DashboardShell({ title, description, actions, children }: DashboardShellProps) {
   return (
-    <section className="mx-auto flex w-full max-w-6xl flex-col gap-8">
-      <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-white px-6 py-5 shadow-sm ring-1 ring-[var(--border-color)]">
+    <section className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-2">
+      <header className="flex flex-wrap items-center justify-between gap-6 rounded-[32px] bg-gradient-to-r from-[#0f172a] via-[#162952] to-[#1f3c8e] px-8 py-6 text-white shadow-[0_25px_60px_rgba(15,23,42,0.25)]">
         <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-[var(--muted)]">Workspace</p>
-          <h1 className="mt-1 text-3xl font-semibold text-[var(--foreground)]">{title}</h1>
-          {description ? <p className="text-sm text-[var(--muted)]">{description}</p> : null}
+          <p className="text-xs uppercase tracking-[0.35em] text-white/60">Workspace</p>
+          <h1 className="mt-1 text-3xl font-semibold">{title}</h1>
+          {description ? <p className="text-sm text-white/70">{description}</p> : null}
         </div>
-        {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
+        {actions ? <div className="flex items-center gap-3">{actions}</div> : null}
       </header>
       <div className="grid gap-6">{children}</div>
     </section>
