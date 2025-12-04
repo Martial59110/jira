@@ -4,6 +4,7 @@ import { authConfig } from "@/lib/auth/options";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
+import type { Session } from "next-auth";
 import { z } from "zod";
 
 const createIssueSchema = z.object({
@@ -28,11 +29,15 @@ async function generateIssueCode() {
   return `MYJ-${baseNumber + 1}`;
 }
 
+type SessionWithEmail = Session & {
+  user: NonNullable<Session["user"]> & { email: string };
+};
+
 export async function createIssueAction(
   _prevState: CreateIssueActionState,
   formData: FormData,
 ): Promise<CreateIssueActionState> {
-  const session = await getServerSession(authConfig);
+  const session = (await getServerSession(authConfig)) as SessionWithEmail | null;
   if (!session?.user?.email) {
     return { success: false, error: "Vous devez être connecté." };
   }
