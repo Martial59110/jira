@@ -32,33 +32,33 @@ export function CreateIssueForm({ onSuccess }: CreateIssueFormProps) {
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
-      <label className="text-sm text-zinc-600 dark:text-zinc-300">
+      <label className="text-sm font-medium text-[#0f172a]">
         Titre
         <input
           name="title"
           type="text"
           required
-          className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-blue-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+          className="mt-2 w-full rounded-2xl border border-[#e2e8f0] bg-[#f7f9fc] px-4 py-3 text-[#0f172a] outline-none transition focus:border-[#2563eb] focus:bg-white"
           placeholder="Nom du ticket"
         />
       </label>
 
-      <label className="text-sm text-zinc-600 dark:text-zinc-300">
+      <label className="text-sm font-medium text-[#0f172a]">
         Assignee
         <input
           name="assignee"
           type="text"
-          className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-blue-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+          className="mt-2 w-full rounded-2xl border border-[#e2e8f0] bg-[#f7f9fc] px-4 py-3 text-[#0f172a] outline-none transition focus:border-[#2563eb] focus:bg-white"
           placeholder="Ex : Victor"
         />
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="text-sm text-zinc-600 dark:text-zinc-300">
+        <label className="text-sm font-medium text-[#0f172a]">
           Statut
           <select
             name="status"
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-blue-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+            className="mt-2 w-full rounded-2xl border border-[#e2e8f0] bg-[#f7f9fc] px-4 py-3 text-[#0f172a] outline-none transition focus:border-[#2563eb] focus:bg-white"
             defaultValue="todo"
           >
             {statusOptions.map((option) => (
@@ -69,12 +69,12 @@ export function CreateIssueForm({ onSuccess }: CreateIssueFormProps) {
           </select>
         </label>
 
-        <label className="text-sm text-zinc-600 dark:text-zinc-300">
+        <label className="text-sm font-medium text-[#0f172a]">
           Échéance
           <input
             name="dueDate"
             type="date"
-            className="mt-1 w-full rounded-lg border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-blue-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+            className="mt-2 w-full rounded-2xl border border-[#e2e8f0] bg-[#f7f9fc] px-4 py-3 text-[#0f172a] outline-none transition focus:border-[#2563eb] focus:bg-white"
           />
         </label>
       </div>
