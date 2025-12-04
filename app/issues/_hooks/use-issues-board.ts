@@ -5,10 +5,11 @@ import { getApiUrl } from "@/lib/get-api-url";
 
 type Issue = {
   id: string;
+  code: string;
   title: string;
   status: string;
-  assignee: string;
-  dueDate: string;
+  assignee?: string | null;
+  dueDate?: string;
 };
 
 type IssuesBoardResponse = {
