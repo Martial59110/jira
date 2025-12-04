@@ -3,7 +3,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getApiUrl } from "@/lib/get-api-url";
 
-type Issue = {
+export type IssuesBoardIssue = {
   id: string;
   code: string;
   title: string;
@@ -12,12 +12,12 @@ type Issue = {
   dueDate?: string;
 };
 
-type IssuesBoardResponse = {
+export type IssuesBoardResponse = {
   columns: {
     status: string;
     label: string;
   }[];
-  issues: Issue[];
+  issues: IssuesBoardIssue[];
 };
 
 const fetchIssues = async (): Promise<IssuesBoardResponse> => {
