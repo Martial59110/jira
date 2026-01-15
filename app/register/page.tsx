@@ -29,9 +29,7 @@ export default function RegisterPage() {
       >
         <p className="text-xs uppercase tracking-[0.35em] text-[#94a3b8]">{t("create_account")}</p>
         <h1 className="mt-2 text-2xl font-semibold text-[#0f172a]">{t("join_myjira")}</h1>
-        <p className="mt-1 text-sm text-[#4c5773]">
-          {t("description")}
-        </p>
+        <p className="mt-1 text-sm text-[#4c5773]">{t("description")}</p>
 
         <div className="mt-6 flex flex-col gap-4">
           <label className="text-sm font-medium text-[#0f172a]">
