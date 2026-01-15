@@ -1,6 +1,6 @@
 "use client";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getApiUrl } from "@/lib/get-api-url";
 
 type DashboardStats = {
@@ -26,8 +26,15 @@ const fetchDashboardStats = async (): Promise<DashboardStats> => {
   return response.json();
 };
 
-export function useDashboardStats() {
+export function useDashboardStatsSuspenseQuery() {
   return useSuspenseQuery<DashboardStats>({
+    queryKey: ["dashboard", "stats"],
+    queryFn: fetchDashboardStats,
+  });
+}
+
+export function useDashboardStats() {
+  return useQuery<DashboardStats>({
     queryKey: ["dashboard", "stats"],
     queryFn: fetchDashboardStats,
   });
