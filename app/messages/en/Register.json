@@ -1,0 +1,15 @@
+{
+    "create_account": "Create account",
+    "join_myjira": "Join MyJira",
+    "description": "Enter your name, email and choose a secure password.",
+    "full_name": "Full name",
+    "full_name_placeholder": "Ex: Claire Martin",
+    "email": "Email",
+    "email_placeholder": "you@company.com",
+    "password": "Password",
+    "password_placeholder": "••••••••",
+    "connecting": "Connecting…",
+    "create_account_button": "Create account",
+    "already_registered": "Already registered?",
+    "back_to_login": "Back to login"
+}
