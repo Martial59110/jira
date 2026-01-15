@@ -1,0 +1,15 @@
+{
+   "recent_activity": "Activité récente",
+   "all_actions": "Toutes les actions sur le workspace MyJira",
+   "reduce": "Réduire",
+   "view_all": "Voir tout",
+   "previous": "Précédent",
+   "next": "Suivant",
+   "page": "Page",
+   "of": "de",
+   "no_recent_activity": "Aucune activité récente.",
+   "just_now": "À l'instant",
+   "minutes_ago": "Il y a {count} min",
+   "hours_ago": "Il y a {count} h",
+   "days_ago": "Il y a {count} j"
+}
