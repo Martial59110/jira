@@ -13,3 +13,8 @@ export const prisma =
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
 }
+
+// Ensure Prisma Client is properly initialized
+if (!process.env.DATABASE_URL) {
+  console.error("DATABASE_URL environment variable is not set");
+}

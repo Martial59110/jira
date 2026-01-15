@@ -29,24 +29,35 @@ export async function registerUserAction(
     return { success: false, error: parsed.error.issues[0]?.message ?? "Champs invalides." };
   }
 
-  const existing = await prisma.user.findUnique({
-    where: { email: parsed.data.email },
-  });
+  try {
+    const existing = await prisma.user.findUnique({
+      where: { email: parsed.data.email },
+    });
 
-  if (existing) {
-    return { success: false, error: "Un compte existe déjà avec cet email." };
+    if (existing) {
+      return { success: false, error: "Un compte existe déjà avec cet email." };
+    }
+
+    const hashedPassword = await bcrypt.hash(parsed.data.password, 10);
+
+    await prisma.user.create({
+      data: {
+        email: parsed.data.email,
+        password: hashedPassword,
+        name: parsed.data.name,
+        role: "member",
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Registration error:", error);
+    if (error instanceof Error) {
+      if (error.message.includes("DATABASE_URL") || error.message.includes("Can't reach database")) {
+        return { success: false, error: "Erreur de connexion à la base de données. Vérifiez la configuration." };
+      }
+      return { success: false, error: error.message };
+    }
+    return { success: false, error: "Une erreur inattendue est survenue." };
   }
-
-  const hashedPassword = await bcrypt.hash(parsed.data.password, 10);
-
-  await prisma.user.create({
-    data: {
-      email: parsed.data.email,
-      password: hashedPassword,
-      name: parsed.data.name,
-      role: "member",
-    },
-  });
-
-  return { success: true };
 }
