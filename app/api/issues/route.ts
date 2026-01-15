@@ -14,21 +14,29 @@ const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
 });
 
 export async function GET() {
-  const issues = await prisma.issue.findMany({
-    orderBy: { updatedAt: "desc" },
-  });
+  try {
+    const issues = await prisma.issue.findMany({
+      orderBy: { updatedAt: "desc" },
+    });
 
-  const formattedIssues = issues.map((issue) => ({
-    id: issue.id,
-    code: issue.code,
-    title: issue.title,
-    status: issue.status,
-    assignee: issue.assignee ?? null,
-    dueDate: issue.dueDate ? dateFormatter.format(issue.dueDate) : null,
-  }));
+    const formattedIssues = issues.map((issue) => ({
+      id: issue.id,
+      code: issue.code,
+      title: issue.title,
+      status: issue.status,
+      assignee: issue.assignee ?? null,
+      dueDate: issue.dueDate ? dateFormatter.format(issue.dueDate) : null,
+    }));
 
-  return NextResponse.json({
-    columns,
-    issues: formattedIssues,
-  });
+    return NextResponse.json({
+      columns,
+      issues: formattedIssues,
+    });
+  } catch (error) {
+    console.error("Error fetching issues:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch issues" },
+      { status: 500 }
+    );
+  }
 }

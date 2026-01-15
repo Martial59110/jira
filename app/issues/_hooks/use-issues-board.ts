@@ -23,7 +23,8 @@ export type IssuesBoardResponse = {
 const fetchIssues = async (): Promise<IssuesBoardResponse> => {
   const response = await fetch(getApiUrl("/api/issues"));
   if (!response.ok) {
-    throw new Error("Impossible de récupérer les tickets");
+    const error = await response.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(error.error || "Failed to fetch issues");
   }
   return response.json();
 };
