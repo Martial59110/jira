@@ -3,39 +3,35 @@
 ## ⚠️ Erreur actuelle
 
 ```
-Error validating datasource `db`: the URL must start with the protocol `file:`.
+Error code 14: Unable to open the database file
 ```
 
-Cette erreur signifie que la variable `DATABASE_URL` sur Vercel n'est pas au bon format.
+Cette erreur signifie que SQLite ne peut pas créer/écrire le fichier de base de données sur Vercel.
 
-## ✅ Solution : Configurer DATABASE_URL sur Vercel
+## ✅ Solution : Utiliser /tmp pour SQLite
 
-### Étape 1 : Aller sur Vercel Dashboard
+Sur Vercel, le système de fichiers est éphémère. Il faut utiliser le répertoire `/tmp` qui est accessible en écriture.
+
+### Étape 1 : Configurer DATABASE_URL sur Vercel
 
 1. Allez sur https://vercel.com/dashboard
 2. Sélectionnez votre projet `myjira`
 3. Allez dans **Settings** → **Environment Variables**
 
-### Étape 2 : Vérifier/Modifier la variable DATABASE_URL
+### Étape 2 : Ajouter la variable DATABASE_URL
 
-**Le format EXACT pour SQLite doit être :**
+**Utilisez le répertoire `/tmp` qui est accessible en écriture :**
 
 ```
-file:./prisma/dev.db
+DATABASE_URL=file:/tmp/dev.db
 ```
 
 ⚠️ **IMPORTANT** :
-- Le format doit commencer par `file:`
-- Ne pas mettre de guillemets autour de la valeur
-- Le chemin est relatif au répertoire du projet
+- Utilisez `/tmp` (chemin absolu) et non `./tmp` (chemin relatif)
+- Le fichier sera créé automatiquement lors de la première migration
+- Les données seront perdues à chaque redéploiement (c'est normal avec SQLite sur Vercel)
 
-### Étape 3 : Ajouter toutes les variables nécessaires
-
-Ajoutez/modifiez ces variables sur Vercel :
-
-```
-DATABASE_URL=file:./prisma/dev.db
-```
+### Étape 3 : Ajouter les autres variables
 
 ```
 NEXTAUTH_SECRET=cuhiuhdijooqkokjiijfjuf
@@ -66,37 +62,42 @@ Après le redéploiement :
 1. **Vérifiez les logs de build** :
    - Allez dans votre déploiement
    - Cliquez sur **Build Logs**
-   - Vérifiez que `prisma generate` s'exécute sans erreur
+   - Vérifiez que `prisma migrate deploy` s'exécute sans erreur
 
 2. **Testez l'application** :
    - Essayez de créer un compte
    - Essayez de vous connecter
 
-3. **Si l'erreur persiste** :
-   - Vérifiez que `DATABASE_URL` commence bien par `file:`
-   - Vérifiez qu'il n'y a pas d'espaces avant/après la valeur
-   - Vérifiez que la variable est bien activée pour **Production**
+## 📝 Format DATABASE_URL pour SQLite sur Vercel
 
-## 📝 Format DATABASE_URL pour SQLite
-
-Le format correct est **obligatoirement** :
+**Format recommandé pour Vercel :**
 
 ```
-file:./chemin/vers/database.db
+file:/tmp/dev.db
 ```
 
-**Exemples valides :**
-- `file:./prisma/dev.db` ✅
-- `file:./tmp/dev.db` ✅
-- `file:/tmp/dev.db` ✅ (chemin absolu)
+**Autres options (moins recommandées) :**
 
-**Exemples invalides :**
-- `postgresql://...` ❌ (format PostgreSQL)
-- `./prisma/dev.db` ❌ (manque le préfixe `file:`)
-- `file://./prisma/dev.db` ❌ (trop de slashes)
+- `file:./prisma/dev.db` - Peut ne pas fonctionner si le répertoire n'existe pas
+- `file:/tmp/prisma/dev.db` - Nécessite de créer le répertoire d'abord
 
-## ⚠️ Limitations de SQLite sur Vercel
+## ⚠️ Limitations importantes
 
-- Le système de fichiers est **éphémère**
-- Les données peuvent être **perdues** lors des redéploiements
-- Pour une vraie persistance, utilisez **PostgreSQL** (Supabase, Vercel Postgres, etc.)
+- **Données éphémères** : Les données SQLite seront perdues à chaque redéploiement
+- **Pas de persistance** : SQLite n'est pas adapté pour la production sur Vercel
+- **Pour la production** : Utilisez PostgreSQL (Supabase, Vercel Postgres, Neon, etc.)
+
+## 🚀 Alternative recommandée : PostgreSQL
+
+Pour une vraie persistance, migrez vers PostgreSQL :
+
+1. Créez une base de données PostgreSQL (Supabase, Vercel Postgres, etc.)
+2. Mettez à jour `prisma/schema.prisma` :
+   ```prisma
+   datasource db {
+     provider = "postgresql"
+     url      = env("DATABASE_URL")
+   }
+   ```
+3. Configurez `DATABASE_URL` avec l'URL PostgreSQL sur Vercel
+4. Exécutez les migrations
