@@ -2,6 +2,7 @@
 
 import { authConfig } from "@/lib/auth/options";
 import { prisma } from "@/lib/prisma";
+import { findUserByEmail } from "@/lib/users-storage";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import type { Session } from "next-auth";
@@ -53,10 +54,7 @@ export async function createIssueAction(
     return { success: false, error: parsed.error.issues[0]?.message ?? "Champs invalides." };
   }
 
-  const author = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    select: { id: true, name: true },
-  });
+  const author = await findUserByEmail(session.user.email);
 
   if (!author) {
     return { success: false, error: "Utilisateur introuvable." };

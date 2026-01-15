@@ -1,8 +1,7 @@
 "use server";
 
-import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { prisma } from "@/lib/prisma";
+import { createUser } from "@/lib/users-storage";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Le nom doit contenir au moins 2 caractères."),
@@ -30,32 +29,17 @@ export async function registerUserAction(
   }
 
   try {
-    const existing = await prisma.user.findUnique({
-      where: { email: parsed.data.email },
-    });
-
-    if (existing) {
-      return { success: false, error: "Un compte existe déjà avec cet email." };
-    }
-
-    const hashedPassword = await bcrypt.hash(parsed.data.password, 10);
-
-    await prisma.user.create({
-      data: {
-        email: parsed.data.email,
-        password: hashedPassword,
-        name: parsed.data.name,
-        role: "member",
-      },
+    await createUser({
+      email: parsed.data.email,
+      password: parsed.data.password,
+      name: parsed.data.name,
+      role: "member",
     });
 
     return { success: true };
   } catch (error) {
     console.error("Registration error:", error);
     if (error instanceof Error) {
-      if (error.message.includes("DATABASE_URL") || error.message.includes("Can't reach database")) {
-        return { success: false, error: "Erreur de connexion à la base de données. Vérifiez la configuration." };
-      }
       return { success: false, error: error.message };
     }
     return { success: false, error: "Une erreur inattendue est survenue." };

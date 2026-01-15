@@ -1,8 +1,7 @@
 import Credentials from "next-auth/providers/credentials";
 import type { NextAuthOptions } from "next-auth";
 import { z } from "zod";
-import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/prisma";
+import { findUserByEmail, verifyPassword } from "@/lib/users-storage";
 
 const credentialsSchema = z.object({
   email: z.string().email(),
@@ -30,15 +29,13 @@ export const authConfig: NextAuthOptions = {
             return null;
           }
 
-          const user = await prisma.user.findUnique({
-            where: { email: parsed.data.email },
-          });
+          const user = await findUserByEmail(parsed.data.email);
 
           if (!user) {
             return null;
           }
 
-          const isPasswordValid = await bcrypt.compare(parsed.data.password, user.password);
+          const isPasswordValid = await verifyPassword(user, parsed.data.password);
           if (!isPasswordValid) {
             return null;
           }
