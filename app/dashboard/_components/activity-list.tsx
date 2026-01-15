@@ -17,7 +17,11 @@ const getRelativeTime = (timestamp: string, t: ReturnType<typeof useTranslations
   return t("days_ago", { count: days });
 };
 
-const translateActivity = (action: string, tActivity: ReturnType<typeof useTranslations>, tStatus: ReturnType<typeof useTranslations>) => {
+const translateActivity = (
+  action: string,
+  tActivity: ReturnType<typeof useTranslations>,
+  tStatus: ReturnType<typeof useTranslations>,
+) => {
   const movedMatch = action.match(/a déplacé ([A-Z]+-\d+) vers (\w+)/);
   if (movedMatch) {
     const [, code, status] = movedMatch;
@@ -79,7 +83,8 @@ export function ActivityList() {
             <span className="mt-1 h-2 w-2 rounded-full bg-[var(--brand)]" />
             <div>
               <p className="text-sm text-[var(--foreground)]">
-                <span className="font-semibold">{item.author}</span> {translateActivity(item.action, tActivity, tStatus)}
+                <span className="font-semibold">{item.author}</span>{" "}
+                {translateActivity(item.action, tActivity, tStatus)}
               </p>
               <p className="text-xs text-[var(--muted)]">{getRelativeTime(item.timestamp, t)}</p>
             </div>
