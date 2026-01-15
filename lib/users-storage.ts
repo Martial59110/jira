@@ -12,7 +12,11 @@ export type User = {
   updatedAt: string;
 };
 
-const USERS_FILE = join(process.cwd(), "lib", "users.json");
+// Use /tmp on Vercel (writable), otherwise use lib/users.json locally
+const USERS_FILE =
+  process.env.VERCEL || process.env.NODE_ENV === "production"
+    ? "/tmp/users.json"
+    : join(process.cwd(), "lib", "users.json");
 
 function ensureUsersFile() {
   if (!existsSync(USERS_FILE)) {
