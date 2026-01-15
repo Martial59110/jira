@@ -24,7 +24,14 @@ const fetchIssues = async (): Promise<IssuesBoardResponse> => {
   const response = await fetch(getApiUrl("/api/issues"));
   if (!response.ok) {
     const error = await response.json().catch(() => ({ error: "Unknown error" }));
-    throw new Error(error.error || "Failed to fetch issues");
+    const errorMessage = error.error || "Failed to fetch issues";
+    
+    // Provide more helpful error message for database connection issues
+    if (response.status === 503 || errorMessage.includes("connection")) {
+      throw new Error("Database connection failed. Please check your database configuration.");
+    }
+    
+    throw new Error(errorMessage);
   }
   return response.json();
 };

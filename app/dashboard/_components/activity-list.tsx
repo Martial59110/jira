@@ -92,7 +92,7 @@ export function ActivityList() {
         ))}
       </ol>
 
-      {showAll && hasMore ? (
+      {showAll && totalPages > 1 ? (
         <div className="mt-5 flex items-center justify-between border-t pt-4 text-sm text-[var(--muted)]">
           <button
             type="button"

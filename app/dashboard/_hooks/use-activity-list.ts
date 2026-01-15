@@ -3,8 +3,8 @@
 import { useCallback, useMemo, useState } from "react";
 import { useDashboardStats } from "@/app/_hooks/use-dashboard-stats";
 
-const DEFAULT_VISIBLE_COUNT = 4;
-const PAGE_SIZE = 10;
+const DEFAULT_VISIBLE_COUNT = 5;
+const PAGE_SIZE = 5;
 
 export function useActivityList() {
   const { data, isLoading, error } = useDashboardStats();
@@ -14,6 +14,7 @@ export function useActivityList() {
 
   const hasMore = items.length > DEFAULT_VISIBLE_COUNT;
   const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+  const shouldShowPagination = showAll && totalPages > 1;
 
   const visibleItems = useMemo(() => {
     if (!showAll) {

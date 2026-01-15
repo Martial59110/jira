@@ -34,6 +34,16 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error fetching issues:", error);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    
+    // Check for Supabase paused project error
+    if (errorMessage.includes("Tenant or user not found") || errorMessage.includes("FATAL")) {
+      return NextResponse.json(
+        { error: "Database connection failed. Please check your database configuration." },
+        { status: 503 }
+      );
+    }
+    
     return NextResponse.json(
       { error: "Failed to fetch issues" },
       { status: 500 }
