@@ -1,6 +1,7 @@
 "use client";
 
 import { useDroppable } from "@dnd-kit/core";
+import { useTranslations } from "next-intl";
 import { KanbanCard } from "./kanban-card";
 
 type KanbanColumnProps = {
@@ -19,10 +20,12 @@ export function KanbanColumn({ title, status, cards }: KanbanColumnProps) {
   const { setNodeRef, isOver } = useDroppable({
     id: status,
   });
+  const t = useTranslations("KanbanColumn");
 
   return (
     <article
       ref={setNodeRef}
+      suppressHydrationWarning
       className={`flex min-h-[360px] flex-col rounded-[28px] bg-white/80 p-5 shadow-[0_15px_40px_rgba(15,23,42,0.08)] ring-1 ring-white/60 transition ${
         isOver ? "ring-2 ring-[#2563eb]" : ""
       }`}
@@ -32,7 +35,7 @@ export function KanbanColumn({ title, status, cards }: KanbanColumnProps) {
         <span className="text-xs font-normal text-[#94a3b8]">{cards.length}</span>
       </header>
       <div className="flex flex-1 flex-col gap-3">
-        {cards.length === 0 && <p className="text-xs text-[#94a3b8]">Aucun ticket.</p>}
+        {cards.length === 0 && <p className="text-xs text-[#94a3b8]">{t("no_tickets")}</p>}
         {cards.map((card) => (
           <KanbanCard key={card.issueId} {...card} />
         ))}
