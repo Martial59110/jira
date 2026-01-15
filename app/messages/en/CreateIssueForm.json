@@ -1,0 +1,17 @@
+{
+    "title": "Title",
+    "assignee": "Assignee",
+    "status": "Status",
+    "due_date": "Due date",
+    "create_ticket": "Create ticket",
+    "create_ticket_description": "Create a new ticket to track your work.",
+    "create_ticket_submit": "Create ticket",
+    "create_ticket_pending": "Creating ticket…",
+    "todo": "Todo",
+    "inProgress": "In progress",
+    "blocked": "Blocked",
+    "done": "Done",
+    "title_placeholder": "Ticket name",
+    "assignee_placeholder": "Ex: Victor",
+    "not_assigned": "Not assigned"
+}
