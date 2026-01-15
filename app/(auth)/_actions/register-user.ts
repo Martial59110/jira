@@ -1,7 +1,8 @@
 "use server";
 
+import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { createUser } from "@/lib/users-storage";
+import { prisma } from "@/lib/prisma";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Le nom doit contenir au moins 2 caractères."),
@@ -28,20 +29,24 @@ export async function registerUserAction(
     return { success: false, error: parsed.error.issues[0]?.message ?? "Champs invalides." };
   }
 
-  try {
-    await createUser({
+  const existing = await prisma.user.findUnique({
+    where: { email: parsed.data.email },
+  });
+
+  if (existing) {
+    return { success: false, error: "Un compte existe déjà avec cet email." };
+  }
+
+  const hashedPassword = await bcrypt.hash(parsed.data.password, 10);
+
+  await prisma.user.create({
+    data: {
       email: parsed.data.email,
-      password: parsed.data.password,
+      password: hashedPassword,
       name: parsed.data.name,
       role: "member",
-    });
+    },
+  });
 
-    return { success: true };
-  } catch (error) {
-    console.error("Registration error:", error);
-    if (error instanceof Error) {
-      return { success: false, error: error.message };
-    }
-    return { success: false, error: "Une erreur inattendue est survenue." };
-  }
+  return { success: true };
 }
