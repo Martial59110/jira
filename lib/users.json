@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "user_default_admin",
+    "email": "admin@test.com",
+    "password": "$2a$10$rOzJqZqZqZqZqZqZqZqZqOqZqZqZqZqZqZqZqZqZqZqZqZqZqZqZq",
+    "name": "Admin",
+    "role": "admin",
+    "createdAt": "2025-01-15T00:00:00.000Z",
+    "updatedAt": "2025-01-15T00:00:00.000Z"
+  }
+]
