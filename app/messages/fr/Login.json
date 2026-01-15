@@ -1,0 +1,14 @@
+{
+    "welcome": "Bienvenue",
+    "login": "Connexion",
+    "login_description": "Entre tes identifiants pour retrouver ton espace.",
+    "email": "Email",
+    "email_placeholder": "you@company.com",
+    "password": "Mot de passe",
+    "password_placeholder": "••••••••",
+    "login_button": "Se connecter",
+    "login_button_loading": "Connexion…",
+    "test_accounts": "Comptes de test : marti@example.com / admin123 ou team@example.com / member123",
+    "no_account": "Pas encore de compte ?",
+    "create_account": "Créer un compte"
+}
