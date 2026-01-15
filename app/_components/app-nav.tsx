@@ -4,10 +4,11 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useAppNav } from "../_hooks/use-app-nav";
+import { useTranslations } from "next-intl";
 
 export function AppNav() {
   const { links, isAuthenticated } = useAppNav();
-
+  const t = useTranslations("AppNav");
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-slate-800 bg-[#111727] px-4 py-6 text-slate-200">
       <div className="flex items-center gap-2 px-2">
@@ -41,7 +42,7 @@ export function AppNav() {
           onClick={() => signOut({ callbackUrl: "/login" })}
           className="rounded-xl border border-white/10 px-3 py-2 text-left text-sm text-white transition hover:bg-white/5"
         >
-          Déconnexion
+          {t("logout")}
         </button>
       ) : null}
     </aside>
