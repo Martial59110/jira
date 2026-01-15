@@ -3,12 +3,13 @@
 import { useDashboardStats } from "@/app/_hooks/use-dashboard-stats";
 import { useTranslations } from "next-intl";
 
-const cardsConfig = (t: ReturnType<typeof useTranslations>) => [
-  { key: "backlog", label: t("todo"), accent: "bg-zinc-900 dark:bg-zinc-100" },
-  { key: "inProgress", label: t("inProgress"), accent: "bg-blue-500" },
-  { key: "done", label: t("done"), accent: "bg-emerald-500" },
-  { key: "blocked", label: t("blocked"), accent: "bg-rose-500" },
-] as const;
+const cardsConfig = (t: ReturnType<typeof useTranslations>) =>
+  [
+    { key: "backlog", label: t("todo"), accent: "bg-zinc-900 dark:bg-zinc-100" },
+    { key: "inProgress", label: t("inProgress"), accent: "bg-blue-500" },
+    { key: "done", label: t("done"), accent: "bg-emerald-500" },
+    { key: "blocked", label: t("blocked"), accent: "bg-rose-500" },
+  ] as const;
 
 export function SummaryCards() {
   const { data } = useDashboardStats();
