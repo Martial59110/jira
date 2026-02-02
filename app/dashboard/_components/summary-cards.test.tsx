@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { SummaryCards } from "./summary-cards";
 
-// Mock des hooks
 vi.mock("@/app/_hooks/use-dashboard-stats", () => ({
   useDashboardStats: vi.fn(),
 }));
@@ -78,7 +77,6 @@ describe("SummaryCards", () => {
 
     const { container } = render(<SummaryCards />);
 
-    // Vérifie que les indicateurs de couleur sont présents
     expect(container.querySelector(".bg-zinc-900")).toBeInTheDocument();
     expect(container.querySelector(".bg-blue-500")).toBeInTheDocument();
     expect(container.querySelector(".bg-emerald-500")).toBeInTheDocument();
