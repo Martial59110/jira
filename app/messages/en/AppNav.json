@@ -1,3 +1,6 @@
 {
-    "logout": "Logout"
+    "logout": "Logout",
+    "language": "Language",
+    "language_en": "English",
+    "language_fr": "Français"
 }

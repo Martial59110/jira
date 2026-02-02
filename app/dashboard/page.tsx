@@ -23,14 +23,6 @@ export default async function DashboardPage() {
       <DashboardShell
         title={t("title")}
         description={t("description")}
-        actions={
-          <Link
-            href="/issues"
-            className="rounded-full bg-white px-5 py-2 text-sm font-semibold text-[#0f172a] shadow-sm transition hover:bg-blue-50"
-          >
-            {t("create_ticket")}
-          </Link>
-        }
       >
         <Suspense fallback={<SummaryCardsFallback />}>
           <SummaryCards />

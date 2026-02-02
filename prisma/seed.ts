@@ -1,11 +1,10 @@
 import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { useTranslations } from "next-intl";
+
 const prisma = new PrismaClient();
 
 async function main() {
-  const t = useTranslations();
   const users = [
     {
       email: "marti@example.com",
@@ -108,17 +107,17 @@ async function main() {
   const activities = [
     {
       author: "Léa",
-      action: "a créé le ticket MYJ-214" + " " + t("todo"),
+      action: "a créé le ticket MYJ-214",
       timestamp: new Date(Date.now() - 5 * 60 * 1000),
     },
     {
       author: "Victor",
-      action: "a déplacé MYJ-198 vers " + " " + t("inProgress"),
+      action: "a déplacé MYJ-198 vers inProgress",
       timestamp: new Date(Date.now() - 32 * 60 * 1000),
     },
     {
       author: "Yasmine",
-      action: "a clôturé MYJ-176" + " " + t("done"),
+      action: "a déplacé MYJ-176 vers done",
       timestamp: new Date(Date.now() - 60 * 60 * 1000),
     },
   ];

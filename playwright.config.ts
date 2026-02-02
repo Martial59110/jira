@@ -30,9 +30,9 @@ export default defineConfig({
     baseURL: process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on',
   },
-
+tsconfig: "tsconfig.playwright.json",
   /* Configure projects for major browsers */
   projects: [
     {
