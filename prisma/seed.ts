@@ -112,12 +112,12 @@ async function main() {
     },
     {
       author: "Victor",
-      action: "a déplacé MYJ-198 vers En cours",
+      action: "a déplacé MYJ-198 vers inProgress",
       timestamp: new Date(Date.now() - 32 * 60 * 1000),
     },
     {
       author: "Yasmine",
-      action: "a clôturé MYJ-176",
+      action: "a déplacé MYJ-176 vers done",
       timestamp: new Date(Date.now() - 60 * 60 * 1000),
     },
   ];

@@ -1,16 +1,19 @@
 "use client";
 
 import { useDashboardStats } from "@/app/_hooks/use-dashboard-stats";
+import { useTranslations } from "next-intl";
 
-const cardsConfig = [
-  { key: "backlog", label: "À faire", accent: "bg-zinc-900 dark:bg-zinc-100" },
-  { key: "inProgress", label: "En cours", accent: "bg-blue-500" },
-  { key: "done", label: "Terminés", accent: "bg-emerald-500" },
-  { key: "blocked", label: "Bloqués", accent: "bg-rose-500" },
-] as const;
+const cardsConfig = (t: ReturnType<typeof useTranslations>) =>
+  [
+    { key: "backlog", label: t("todo"), accent: "bg-zinc-900 dark:bg-zinc-100" },
+    { key: "inProgress", label: t("inProgress"), accent: "bg-blue-500" },
+    { key: "done", label: t("done"), accent: "bg-emerald-500" },
+    { key: "blocked", label: t("blocked"), accent: "bg-rose-500" },
+  ] as const;
 
 export function SummaryCards() {
   const { data } = useDashboardStats();
+  const t = useTranslations("SummaryCards");
   const totals = data?.totals ?? {
     backlog: 0,
     inProgress: 0,
@@ -20,7 +23,7 @@ export function SummaryCards() {
 
   return (
     <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {cardsConfig.map((card) => {
+      {cardsConfig(t).map((card) => {
         const value = totals[card.key];
         return (
           <article

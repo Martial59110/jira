@@ -1,0 +1,14 @@
+{
+  "welcome": "Welcome",
+  "login": "Login",
+  "login_description": "Enter your credentials to find your space.",
+  "email": "Email",
+  "email_placeholder": "you@company.com",
+  "password_placeholder": "••••••••",
+  "password": "Password",
+  "login_button": "Login",
+  "login_button_loading": "Login…",
+  "test_accounts": "Test accounts: marti@example.com / admin123 or team@example.com / member123",
+  "no_account": "No account?",
+  "create_account": "Create account"
+}

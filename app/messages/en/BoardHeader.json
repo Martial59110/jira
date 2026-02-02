@@ -1,0 +1,7 @@
+{
+  "product": "Product",
+  "board": "Board",
+  "kanban_view": "Kanban view of the current tickets.",
+  "filter": "Filter",
+  "create_ticket": "Create ticket"
+}

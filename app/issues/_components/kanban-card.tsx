@@ -39,6 +39,7 @@ export function KanbanCard({ issueId, code, title, assignee, dueDate }: KanbanCa
       style={cardStyle}
       {...listeners}
       {...attributes}
+      suppressHydrationWarning
       className={`rounded-2xl border-2 bg-white p-4 shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition-colors hover:border-[#bfd2ff] hover:shadow-[0_12px_32px_rgba(15,23,42,0.1)] ${
         isDragging ? "opacity-70 ring-2 ring-[#2563eb]" : ""
       }`}

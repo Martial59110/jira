@@ -23,7 +23,15 @@ export type IssuesBoardResponse = {
 const fetchIssues = async (): Promise<IssuesBoardResponse> => {
   const response = await fetch(getApiUrl("/api/issues"));
   if (!response.ok) {
-    throw new Error("Impossible de récupérer les tickets");
+    const error = await response.json().catch(() => ({ error: "Unknown error" }));
+    const errorMessage = error.error || "Failed to fetch issues";
+
+    // Provide more helpful error message for database connection issues
+    if (response.status === 503 || errorMessage.includes("connection")) {
+      throw new Error("Database connection failed. Please check your database configuration.");
+    }
+
+    throw new Error(errorMessage);
   }
   return response.json();
 };

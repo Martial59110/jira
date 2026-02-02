@@ -29,7 +29,6 @@ export async function GET() {
 
   const activity = await prisma.activity.findMany({
     orderBy: { timestamp: "desc" },
-    take: 5,
   });
 
   return NextResponse.json({

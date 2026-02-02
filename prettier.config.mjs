@@ -6,6 +6,7 @@ const config = {
   singleQuote: false,
   tabWidth: 2,
   trailingComma: "all",
+  endOfLine: "lf",
 };
 
 export default config;
