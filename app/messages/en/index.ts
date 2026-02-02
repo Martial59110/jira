@@ -13,17 +13,17 @@ import Activity from "./Activity.json";
 import Register from "./Register.json";
 
 export const en = {
-    ActivityList,
-    BoardGrip,
-    KanbanColumn,
-    BoardHeader,
-    CreateIssueForm,
-    CreateIssueModal,
-    AppNav,
-    Login,
-    SummaryCards,
-    Dashboard,
-    DashboardError,
-    Activity,
-    Register
-}
+  ActivityList,
+  BoardGrip,
+  KanbanColumn,
+  BoardHeader,
+  CreateIssueForm,
+  CreateIssueModal,
+  AppNav,
+  Login,
+  SummaryCards,
+  Dashboard,
+  DashboardError,
+  Activity,
+  Register,
+};

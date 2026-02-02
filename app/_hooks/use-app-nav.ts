@@ -31,6 +31,3 @@ export function useAppNav() {
     isAuthenticated: status === "authenticated",
   };
 }
-
-
-

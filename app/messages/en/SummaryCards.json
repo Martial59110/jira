@@ -1,6 +1,6 @@
 {
-    "todo": "Todo",
-    "inProgress": "In progress",
-    "blocked": "Blocked",
-    "done": "Done"
+  "todo": "Todo",
+  "inProgress": "In progress",
+  "blocked": "Blocked",
+  "done": "Done"
 }

@@ -59,8 +59,12 @@ export function AppNav() {
           disabled={isPending}
           className="w-full rounded-xl border border-white/10 bg-[#1a2332] px-3 py-2 text-sm text-white outline-none transition hover:bg-white/5 focus:border-blue-400 disabled:opacity-50"
         >
-          <option value="en" className="bg-[#1a2332] text-white">{t("language_en")}</option>
-          <option value="fr" className="bg-[#1a2332] text-white">{t("language_fr")}</option>
+          <option value="en" className="bg-[#1a2332] text-white">
+            {t("language_en")}
+          </option>
+          <option value="fr" className="bg-[#1a2332] text-white">
+            {t("language_fr")}
+          </option>
         </select>
       </div>
 

@@ -43,12 +43,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider>
-        <AppProviders>
-          <div className="flex min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-            <AppNav />
-            <div className="flex-1 overflow-y-auto px-10 py-10">{children}</div>
-          </div>
-        </AppProviders>
+          <AppProviders>
+            <div className="flex min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+              <AppNav />
+              <div className="flex-1 overflow-y-auto px-10 py-10">{children}</div>
+            </div>
+          </AppProviders>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,15 +1,15 @@
 {
-    "recent_activity": "Recent activity",
-    "all_actions": "All actions on the MyJira workspace",
-    "reduce": "Reduce",
-    "view_all": "View all",
-    "previous": "Previous",
-    "next": "Next",
-    "page": "Page",
-    "of": "of",
-    "no_recent_activity": "No recent activity.",
-    "just_now": "Just now",
-    "minutes_ago": "{count} min ago",
-    "hours_ago": "{count} h ago",
-    "days_ago": "{count} d ago"
+  "recent_activity": "Recent activity",
+  "all_actions": "All actions on the MyJira workspace",
+  "reduce": "Reduce",
+  "view_all": "View all",
+  "previous": "Previous",
+  "next": "Next",
+  "page": "Page",
+  "of": "of",
+  "no_recent_activity": "No recent activity.",
+  "just_now": "Just now",
+  "minutes_ago": "{count} min ago",
+  "hours_ago": "{count} h ago",
+  "days_ago": "{count} d ago"
 }

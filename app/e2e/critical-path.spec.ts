@@ -6,10 +6,14 @@ test.describe("Parcours critique du board", () => {
     await page.getByRole("textbox", { name: "Email" }).fill("marti@example.com");
     await page.getByRole("textbox", { name: "Mot de passe" }).fill("admin123");
     await page.getByRole("button", { name: "Se connecter" }).click();
-    await expect(page.getByRole("heading", { name: "Tableau de bord" })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("heading", { name: "Tableau de bord" })).toBeVisible({
+      timeout: 15000,
+    });
 
     await page.getByRole("link", { name: "Board", exact: true }).click();
-    await expect(page.getByRole("button", { name: "Nouveau ticket" })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("button", { name: "Nouveau ticket" })).toBeVisible({
+      timeout: 15000,
+    });
 
     await page.getByRole("button", { name: "Nouveau ticket" }).click();
 

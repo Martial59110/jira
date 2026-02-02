@@ -4,12 +4,13 @@ import { useFormStatus } from "react-dom";
 import { useCreateIssueForm } from "../_hooks/use-create-issue-form";
 import { useTranslations } from "next-intl";
 
-const statusOptions = (t: ReturnType<typeof useTranslations>) => [
-  { value: "todo", label: t("todo") },
-  { value: "inProgress", label: t("inProgress") },
-  { value: "blocked", label: t("blocked") },
-  { value: "done", label: t("done") },
-] as const;
+const statusOptions = (t: ReturnType<typeof useTranslations>) =>
+  [
+    { value: "todo", label: t("todo") },
+    { value: "inProgress", label: t("inProgress") },
+    { value: "blocked", label: t("blocked") },
+    { value: "done", label: t("done") },
+  ] as const;
 
 type CreateIssueFormProps = {
   onSuccess?: () => void;

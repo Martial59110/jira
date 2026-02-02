@@ -35,9 +35,9 @@ describe("BoardHeader", () => {
   it("appelle onCreateTicket au clic sur le bouton", () => {
     const onCreateTicket = vi.fn();
     render(<BoardHeader onCreateTicket={onCreateTicket} />);
-    
+
     fireEvent.click(screen.getByRole("button", { name: "Nouveau ticket" }));
-    
+
     expect(onCreateTicket).toHaveBeenCalledTimes(1);
   });
 

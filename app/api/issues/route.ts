@@ -38,19 +38,16 @@ export async function GET() {
   } catch (error) {
     console.error("Error fetching issues:", error);
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    
+
     // Check for Supabase paused project error
     if (errorMessage.includes("Tenant or user not found") || errorMessage.includes("FATAL")) {
       return NextResponse.json(
         { error: "Database connection failed. Please check your database configuration." },
-        { status: 503 }
+        { status: 503 },
       );
     }
-    
-    return NextResponse.json(
-      { error: "Failed to fetch issues" },
-      { status: 500 }
-    );
+
+    return NextResponse.json({ error: "Failed to fetch issues" }, { status: 500 });
   }
 }
 
@@ -75,10 +72,7 @@ export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authConfig);
     if (!session?.user?.email) {
-      return NextResponse.json(
-        { error: "Vous devez être connecté." },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Vous devez être connecté." }, { status: 401 });
     }
 
     const body = await request.json();
@@ -86,8 +80,11 @@ export async function POST(request: NextRequest) {
 
     if (!parsed.success) {
       return NextResponse.json(
-        { error: parsed.error.issues[0]?.message ?? "Champs invalides.", errors: parsed.error.flatten().fieldErrors },
-        { status: 400 }
+        {
+          error: parsed.error.issues[0]?.message ?? "Champs invalides.",
+          errors: parsed.error.flatten().fieldErrors,
+        },
+        { status: 400 },
       );
     }
 
@@ -97,10 +94,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!author) {
-      return NextResponse.json(
-        { error: "Utilisateur introuvable." },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Utilisateur introuvable." }, { status: 404 });
     }
 
     const code = await generateIssueCode();
@@ -136,9 +130,6 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Error creating issue:", error);
-    return NextResponse.json(
-      { error: "Erreur lors de la création du ticket." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Erreur lors de la création du ticket." }, { status: 500 });
   }
 }

@@ -20,10 +20,7 @@ export default async function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-[var(--background)] px-4 py-10 font-sans">
-      <DashboardShell
-        title={t("title")}
-        description={t("description")}
-      >
+      <DashboardShell title={t("title")} description={t("description")}>
         <Suspense fallback={<SummaryCardsFallback />}>
           <SummaryCards />
         </Suspense>

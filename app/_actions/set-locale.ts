@@ -11,7 +11,7 @@ export async function setLocaleAction(locale: string): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.set("locale", validLocale, {
     path: "/",
-    maxAge: 60 * 60 * 24 * 365, 
+    maxAge: 60 * 60 * 24 * 365,
     sameSite: "lax",
   });
 }

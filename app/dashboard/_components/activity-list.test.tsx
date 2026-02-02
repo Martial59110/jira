@@ -82,7 +82,12 @@ describe("ActivityList", () => {
   it("affiche les activités avec l'auteur", () => {
     mockUseActivityList.mockReturnValue({
       visibleItems: [
-        { id: "1", author: "Alice", action: "a créé le ticket MYJ-001", timestamp: new Date().toISOString() },
+        {
+          id: "1",
+          author: "Alice",
+          action: "a créé le ticket MYJ-001",
+          timestamp: new Date().toISOString(),
+        },
       ],
       hasMore: false,
       showAll: false,

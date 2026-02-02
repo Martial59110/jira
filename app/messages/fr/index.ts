@@ -12,20 +12,18 @@ import DashboardError from "./DashboardError.json";
 import Activity from "./Activity.json";
 import Register from "./Register.json";
 
-
 export const fr = {
-    ActivityList,
-    BoardGrip,
-    BoardHeader,
-    CreateIssueForm,
-    CreateIssueModal,
-    KanbanColumn,
-    AppNav,
-    Login,
-    SummaryCards,
-    Dashboard,
-    DashboardError,
-    Activity,
-    Register
-   
+  ActivityList,
+  BoardGrip,
+  BoardHeader,
+  CreateIssueForm,
+  CreateIssueModal,
+  KanbanColumn,
+  AppNav,
+  Login,
+  SummaryCards,
+  Dashboard,
+  DashboardError,
+  Activity,
+  Register,
 };

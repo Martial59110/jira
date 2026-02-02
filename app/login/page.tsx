@@ -35,9 +35,7 @@ export default function LoginPage() {
       <section className="relative z-10 w-full max-w-md rounded-[32px] bg-white/95 p-10 shadow-[0_30px_80px_rgba(15,23,42,0.15)] ring-1 ring-[#e0e7ff]">
         <p className="text-xs uppercase tracking-[0.35em] text-[#94a3b8]">{t("welcome")}</p>
         <h1 className="mt-2 text-2xl font-semibold text-[#0f172a]">{t("login")}</h1>
-        <p className="mt-1 text-sm text-[#4c5773]">
-          {t("login_description")}
-        </p>
+        <p className="mt-1 text-sm text-[#4c5773]">{t("login_description")}</p>
 
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
           <label className="text-sm font-medium text-[#0f172a]">
@@ -75,9 +73,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-4 text-xs text-[#94a3b8]">
-          {t("test_accounts")}
-        </p>
+        <p className="mt-4 text-xs text-[#94a3b8]">{t("test_accounts")}</p>
 
         <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#eff3ff] px-4 py-3 text-sm text-[#475569]">
           <span>{t("no_account")}</span>
