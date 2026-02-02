@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { KanbanCard } from "./kanban-card";
 
-// Mock dnd-kit
 vi.mock("@dnd-kit/core", () => ({
   useDraggable: () => ({
     attributes: {},

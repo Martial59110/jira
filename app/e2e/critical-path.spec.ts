@@ -25,7 +25,6 @@ test.describe("Parcours critique du board", () => {
     await expect(page.getByText(ticketTitle)).toBeVisible({ timeout: 10000 });
 
     const ticket = page.getByText(ticketTitle);
-
     const targetColumn = page.locator("article").nth(1);
 
     const ticketBox = await ticket.boundingBox();

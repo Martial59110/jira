@@ -2,19 +2,14 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { CreateIssueForm } from "./create-issue-form";
 
-// Mock des hooks
-vi.mock("react-dom", async () => {
-  const actual = await vi.importActual("react-dom");
-  return {
-    ...actual,
-    useFormStatus: () => ({ pending: false }),
-  };
-});
-
 vi.mock("../_hooks/use-create-issue-form", () => ({
   useCreateIssueForm: () => ({
-    state: { success: false, error: null },
-    formAction: vi.fn(),
+    register: (name: string) => ({ name }),
+    errors: {},
+    onSubmit: vi.fn((e) => e.preventDefault()),
+    isPending: false,
+    isError: false,
+    error: null,
   }),
 }));
 
