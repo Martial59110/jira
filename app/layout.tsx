@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
+//test
 export const metadata: Metadata = {
   title: "MyJira - Gestion de projets",
   description: "Application de gestion de projets style Jira",
